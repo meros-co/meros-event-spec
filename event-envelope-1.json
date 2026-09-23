@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://meros.co/spec/schema/event-envelope-1.json",
+  "title": "Meros Event Envelope v1",
+  "description": "The product-agnostic event contract every Meros product emits to a collector (Imperio, the Meros cloud, both, or neither). One event is one flat JSON object; the local log is newline-delimited JSON. Generalized from the Sluice-derived draft into a portfolio contract: `seq` and `subject` are optional so trivial emitters aren't burdened, `critical` severity is available. See docs/event-envelope.md. This schema is the conformance authority; size limits (attrs <= 16 KiB, total <= 64 KiB) are enforced by the collector, not expressible here. Collector receipt metadata (received_at, clock_suspect) is tracked outside the envelope, never injected into it.",
+  "type": "object",
+  "required": ["envelope", "id", "occurred_at", "source", "type", "severity"],
+  "additionalProperties": false,
+  "properties": {
+    "envelope": {
+      "description": "Envelope format version. Frozen at 1. Additive fields never bump it; only a breaking change does.",
+      "const": 1
+    },
+    "id": {
+      "description": "ULID, emitter-generated, 26 chars Crockford base32. Sortable by time and the idempotency key: a collector dedupes on (source.instance, id).",
+      "type": "string",
+      "pattern": "^[0-7][0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{25}$"
+    },
+    "occurred_at": {
+      "description": "RFC3339 UTC, millisecond precision, emitter clock. When it happened, not when it was sent. Must end in 'Z'.",
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,9})?Z$"
+    },
+    "seq": {
+      "description": "Optional monotonic sequence per (source.product, source.instance), from 1, persisted across restarts. Lets a collector detect gaps (events lost vs never emitted). Omitted by emitters that cannot persist a counter.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "source": {
+      "description": "Who emitted the event.",
+      "type": "object",
+      "required": ["product", "version", "instance"],
+      "additionalProperties": false,
+      "properties": {
+        "product": {
+          "description": "Lowercase product slug; the namespace owner for `type` (manifold, basin, sluice, rfdeck, drawlive, imperio, ...). Unknown slugs accepted.",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,63}$"
+        },
+        "version": {
+          "description": "Emitter software version — correlates behaviour with a release.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "instance": {
+          "description": "Stable opaque per-install id, generated locally on first run. Never a MAC address. Unique within a product; part of the dedupe key.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+        },
+        "site": {
+          "description": "Optional operator-assigned local site label. NOT the cloud's tenancy — the cloud assigns a site server-side from the ingest token.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "edition": {
+          "description": "Optional build tier — tells you which tier generated a fault.",
+          "type": "string",
+          "enum": ["desktop", "server", "appliance"]
+        }
+      }
+    },
+    "type": {
+      "description": "`product.subject.verb`, lowercase, dot-separated, past tense (a thing that happened). The product owns its namespace; unknown type VALUES are accepted, only the shape is fixed.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9_]*){2,}$"
+    },
+    "severity": {
+      "description": "Syslog-style level; drives alert routing without parsing attrs.",
+      "type": "string",
+      "enum": ["debug", "info", "notice", "warning", "error", "critical"]
+    },
+    "subject": {
+      "description": "Optional — what the event is about. A stable kind+id, with an optional display name.",
+      "type": "object",
+      "required": ["kind", "id"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{0,63}$"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 256
+        }
+      }
+    },
+    "actor": {
+      "description": "Optional — who/what caused it. Absent means unknown, which is different from `system`. `external` means another controller did it.",
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["user", "system", "device", "external"]
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 256
+        }
+      }
+    },
+    "attrs": {
+      "description": "Product-specific, opaque to every other product (event contract, not state contract). Serialized <= 16 KiB (collector-enforced).",
+      "type": "object"
+    },
+    "trace": {
+      "description": "Optional correlation id tying a caused chain of events together.",
+      "type": "string",
+      "maxLength": 128
+    }
+  }
+}

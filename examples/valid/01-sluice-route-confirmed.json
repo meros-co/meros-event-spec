@@ -1,0 +1,19 @@
+{
+  "envelope": 1,
+  "id": "01J9Z3K7QPX2ABCDEFGHJKMNPQ",
+  "occurred_at": "2026-09-06T10:47:03.142Z",
+  "seq": 10427,
+  "source": {
+    "product": "sluice",
+    "version": "0.6.0",
+    "instance": "e7c1a9f2",
+    "site": "auditorium",
+    "edition": "desktop"
+  },
+  "type": "sluice.route.confirmed",
+  "severity": "info",
+  "subject": { "kind": "route", "id": "snd-3f2a>rcv-91c0", "name": "Pulpit Mic → Lobby Amp" },
+  "actor": { "kind": "user", "id": "u_4412", "name": "David" },
+  "attrs": { "state": "confirmed", "previous": "configured", "transport": "nmos-is05" },
+  "trace": "01J9Z3K7QP-recall-88"
+}

@@ -1,0 +1,8 @@
+{
+  "envelope": 1,
+  "id": "01J9Z3PBVW6X7Y8Z9ABCDEF012",
+  "occurred_at": "2026-09-06T10:47:06.250Z",
+  "source": { "product": "sluice", "version": "0.6.0" },
+  "type": "sluice.device.offline",
+  "severity": "warning"
+}

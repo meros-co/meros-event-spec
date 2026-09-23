@@ -1,0 +1,11 @@
+{
+  "envelope": 1,
+  "id": "01J9Z3N9TT5V6W7X8Y9ZABCDEF",
+  "occurred_at": "2026-09-06T10:47:05.500Z",
+  "source": { "product": "sluice", "version": "0.6.0", "instance": "e7c1a9f2" },
+  "type": "sluice.route.changed",
+  "severity": "notice",
+  "subject": { "kind": "route", "id": "snd-11a2>rcv-77b4" },
+  "actor": { "kind": "external" },
+  "attrs": { "reason": "observed_supersedes_intent" }
+}

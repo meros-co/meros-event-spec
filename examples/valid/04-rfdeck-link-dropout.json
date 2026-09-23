@@ -1,0 +1,10 @@
+{
+  "envelope": 1,
+  "id": "01J9Z3PBVW6X7Y8Z9ABCDEF012",
+  "occurred_at": "2026-09-06T10:47:06.250Z",
+  "source": { "product": "rfdeck", "version": "1.2.0", "instance": "rack-2", "edition": "appliance" },
+  "type": "rfdeck.link.dropout",
+  "severity": "warning",
+  "subject": { "kind": "transmitter", "id": "tx-7", "name": "Handheld 7" },
+  "attrs": { "rssi_dbm": -92, "duration_ms": 140 }
+}

@@ -1,0 +1,6 @@
+{
+  "01-missing-severity.json": "required — top-level 'severity' is omitted",
+  "02-bad-severity-enum.json": "enum — 'severity' is 'fatal', not one of debug|info|notice|warning|error|critical",
+  "03-bad-type-shape.json": "pattern — 'type' is not lowercase dotted product.subject.verb",
+  "04-source-missing-instance.json": "required (nested) — 'source' is missing its required 'instance'"
+}

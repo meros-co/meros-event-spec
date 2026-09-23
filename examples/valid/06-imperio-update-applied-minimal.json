@@ -1,0 +1,8 @@
+{
+  "envelope": 1,
+  "id": "01J9Z3RF0Z8A9BCDEF01234567",
+  "occurred_at": "2026-09-06T10:47:08.000Z",
+  "source": { "product": "imperio", "version": "2.0.0", "instance": "site-hq" },
+  "type": "imperio.update.applied",
+  "severity": "info"
+}

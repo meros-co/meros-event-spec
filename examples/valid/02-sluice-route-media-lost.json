@@ -1,0 +1,11 @@
+{
+  "envelope": 1,
+  "id": "01J9Z3M0RS4T5V6W7X8Y9ZABCD",
+  "occurred_at": "2026-09-06T10:47:04.001Z",
+  "seq": 10428,
+  "source": { "product": "sluice", "version": "0.6.0", "instance": "e7c1a9f2" },
+  "type": "sluice.route.media_lost",
+  "severity": "error",
+  "subject": { "kind": "route", "id": "snd-3f2a>rcv-91c0", "name": "Pulpit Mic → Lobby Amp" },
+  "attrs": { "rtp_seen": false, "was": "media_detected" }
+}

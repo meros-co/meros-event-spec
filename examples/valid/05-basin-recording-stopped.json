@@ -1,0 +1,11 @@
+{
+  "envelope": 1,
+  "id": "01J9Z3QDXY7Z8A9BCDEF012345",
+  "occurred_at": "2026-09-06T10:47:07.000Z",
+  "seq": 42,
+  "source": { "product": "basin", "version": "0.3.1", "instance": "basin-mixer-a", "edition": "server" },
+  "type": "basin.recording.stopped",
+  "severity": "critical",
+  "subject": { "kind": "recording", "id": "rec-2026-09-06-1", "name": "Sunday AM" },
+  "attrs": { "reason": "disk_full", "free_mb": 118 }
+}
