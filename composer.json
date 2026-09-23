@@ -1,0 +1,7 @@
+{
+    "name": "meros/event-spec",
+    "description": "Meros event envelope specification — the JSON Schema (conformance authority), human spec, and conformance fixtures.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["meros", "event", "envelope", "schema", "spec", "json-schema"]
+}

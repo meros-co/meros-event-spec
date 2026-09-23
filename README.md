@@ -36,6 +36,18 @@ examples/invalid/manifest.json   filename -> the single rule each invalid case b
 It does **not** enforce size limits (`attrs` ≤ 16 KiB, total ≤ 64 KiB) or dedupe —
 those are collector responsibilities, not expressible in JSON Schema.
 
+## Install (PHP)
+
+Published as a Composer package so a PHP consumer gets the schema in `vendor/`:
+
+```jsonc
+"repositories": [{ "type": "vcs", "url": "https://github.com/meros-co/meros-event-spec.git" }],
+"require": { "meros/event-spec": "^0.1" }
+```
+
+Then read `vendor/meros/event-spec/event-envelope-1.json`. (Public repo — no auth.)
+For other languages, just fetch `event-envelope-1.json` directly.
+
 ## Conformance
 
 Validate your emitted events against `event-envelope-1.json` with any JSON Schema
