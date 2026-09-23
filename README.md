@@ -9,8 +9,7 @@ repo is the single source of truth for that contract:
 - **[`examples/`](examples)** — conformance fixtures.
 
 Published so any product — including open-source ones — can conform and self-check.
-The reference emitters that implement it are `github.com/meros-co/meros-event` (Go,
-public) and `meros/event` (PHP, private).
+The reference emitter that implements it is `github.com/meros-co/meros-event`.
 
 ## Layout
 
